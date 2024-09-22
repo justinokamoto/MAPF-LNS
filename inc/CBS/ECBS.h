@@ -18,6 +18,7 @@ public:
 	ECBSNode* getGoalNode() { return goal_node; }
     void updatePaths(ECBSNode* curr);
 	void clear();
+	void printPaths() const;
 private:
     //ECBSNode* dummy_start = nullptr;
     ECBSNode* goal_node = nullptr;
@@ -43,7 +44,4 @@ private:
 	bool findPathForSingleAgent(ECBSNode*  node, int ag);
 	void classifyConflicts(ECBSNode &node);
 	void computeConflictPriority(shared_ptr<Conflict>& con, ECBSNode& node);
-
-	//update information
-	void printPaths() const;
 };

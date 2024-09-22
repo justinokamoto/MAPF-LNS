@@ -137,9 +137,6 @@ protected:
 
 	int num_of_agents;
 
-
-
-	vector<Path> paths_found_initially;  // contain initial paths found
 	// vector<MDD*> mdds_initially;  // contain initial paths found
 	vector < SingleAgentSolver* > search_engines;  // used to find (single) agents' paths and mdd
 
@@ -159,6 +156,7 @@ protected:
 	// print and save
 	void printResults() const;
 	static void printConflicts(const HLNode &curr) ;
+	virtual void printPaths() const;
 
 	bool validateSolution() const;
 	inline int getAgentLocation(int agent_id, size_t timestep) const;
@@ -170,6 +168,8 @@ protected:
 
 private: // CBS only, cannot be used by ECBS
     CBSNode* goal_node = nullptr;
+
+	vector<Path> paths_found_initially;  // contain initial paths found
 
 	pairing_heap< CBSNode*, compare<CBSNode::compare_node_by_f> > cleanup_list; // it is called open list in ECBS
 	pairing_heap< CBSNode*, compare<CBSNode::compare_node_by_inadmissible_f> > open_list; // this is used for EES
@@ -185,6 +185,4 @@ private: // CBS only, cannot be used by ECBS
 	bool generateRoot();
 	bool findPathForSingleAgent(CBSNode*  node, int ag, int lower_bound = 0);
 	void classifyConflicts(CBSNode &parent);
-
-	void printPaths() const;
 };
